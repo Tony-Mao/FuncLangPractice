@@ -1,0 +1,6 @@
+(defun has-number-p (x)
+  (or (and (listp x) 
+           (or (some 'numberp x) 
+               (and (listp (car x)) (some 'has-number-p (car x)))
+               (some 'has-number-p (cdr x))))
+      (numberp x)))

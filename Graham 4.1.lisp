@@ -1,0 +1,20 @@
+(in-package #:cs325-user) 
+
+(defun rotate-array (arr)
+  (let ((dim (car (array-dimensions arr))))
+    (let ((temp-arr (make-array (list dim dim) :initial-element nil)))
+      (dotimes (i dim)
+        (dotimes (j dim)
+          (setf (aref temp-arr j (- (1- dim) i)) (aref arr i j)))) temp-arr)))
+
+(defun nrotate-array (arr)
+  (let ((dim (1- (array-dimension arr 0))))
+    (dotimes (i (1+ (floor dim 2)))
+      (dotimes (j (ceiling dim 2))
+        (rotatef (aref arr (- dim j) i) (aref arr i j))
+        (rotatef (aref arr j (- dim i)) (aref arr (- dim i) (- dim j)))
+        (rotatef (aref arr (- dim j) i) (aref arr j (- dim i)))
+    )))arr)
+          
+(defun center (dim)
+  (if (eql 0 (rem dim 2)) (1+ (/ dim 2)) (/ (1+ dim) 2)))

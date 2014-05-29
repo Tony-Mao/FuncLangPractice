@@ -1,0 +1,11 @@
+(in-package #:cs325-user)
+
+(defun max-min (vec &key (start 0) (end (length vec)))
+  (if (> start (1- end)) 
+      (values nil nil)
+    (let ((elt (aref vec start)))
+      (if (= start (1- end)) 
+          (values elt elt)
+        (multiple-value-bind (big small) (max-min vec :start (1+ start) :end end)
+          (values (max elt big)
+                  (min elt small)))))))
